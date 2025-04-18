@@ -5,6 +5,13 @@ import { MapContainer, TileLayer, Marker, Popup, Polyline } from "react-leaflet"
 import { LatLng, icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
 
+import dynamic from "next/dynamic";
+
+const Map = dynamic(() => import("./Map"), {
+  ssr: false
+});
+
+
 export function HowItWorksSection() {
   const routeCoordinates = [
     new LatLng(19.0760, 72.8777), // Mumbai
@@ -81,22 +88,7 @@ export function HowItWorksSection() {
               </div>
             </div>
             <div className="flex-shrink-0 w-full md:w-[400px] h-[350px] md:h-[350px] rounded-xl shadow-xl overflow-hidden mt-6 md:mt-0 z-0">
-              <MapContainer center={new LatLng(19.0760, 72.8777)} zoom={6} style={{ width: "100%", height: "100%" }}>
-                <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                <Marker
-                  position={new LatLng(19.0760, 72.8777)}
-                  icon={icon({ iconUrl: "/path/to/your/custom-marker-icon.png", iconSize: [30, 30] })}
-                >
-                  <Popup>Mumbai</Popup>
-                </Marker>
-                <Marker
-                  position={new LatLng(12.9716, 77.5946)}
-                  icon={icon({ iconUrl: "/path/to/your/custom-marker-icon.png", iconSize: [30, 30] })}
-                >
-                  <Popup>Bangalore</Popup>
-                </Marker>
-                <Polyline positions={routeCoordinates} color="blue" weight={4} opacity={0.7} />
-              </MapContainer>
+                <Map />
             </div>
           </div>
         </div>
