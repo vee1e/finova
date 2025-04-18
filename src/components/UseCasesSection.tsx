@@ -10,12 +10,12 @@ export function UseCasesSection() {
             Kolkata to Manipal: Auto → Train → Flight → Bus → Cab – We plan it all
           </p>
         </div>
-        
+
         <div className="max-w-4xl mx-auto bg-card shadow-xl rounded-xl overflow-hidden border border-border">
           <div className="bg-primary py-6 px-8">
-            <div className="text-primary-foreground font-mono mb-2">YatraGPT {`>`} Plan a journey from Kolkata (Saltlake) to Manipal University</div>
+            <div className="text-primary-foreground font-mono mb-2">YatraGPT {`>`} Plan a journey from Kolkata (Saltlake) to Manipal Institute of Technology</div>
           </div>
-          
+
           <div className="p-8">
             <div className="flex flex-col md:flex-row justify-between mb-8">
               <div>
@@ -31,12 +31,12 @@ export function UseCasesSection() {
               </div>
               <div className="mt-4 md:mt-0">
                 <div className="text-sm text-muted-foreground">DESTINATION</div>
-                <div className="font-semibold">Manipal University</div>
+                <div className="font-semibold">Manipal Institute of Technology</div>
                 <div className="text-muted-foreground">June 15, 6:45 PM</div>
               </div>
             </div>
-            
-            <div className="relative pl-8 border-l-2 border-dashed border-border">
+
+            <div className="relative pl-11 border-l-2 border-solid border-border">
               <div className="mb-10 relative">
                 <div className="absolute -left-[2.1rem] top-0 w-6 h-6 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
@@ -50,7 +50,7 @@ export function UseCasesSection() {
                   ₹180 · Comfort: Medium
                 </div>
               </div>
-              
+
               <div className="mb-10 relative">
                 <div className="absolute -left-[2.1rem] top-0 w-6 h-6 rounded-full bg-indigo-500/10 flex items-center justify-center border border-indigo-500/20">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-indigo-400" viewBox="0 0 20 20" fill="currentColor">
@@ -63,7 +63,7 @@ export function UseCasesSection() {
                   ₹45 · Comfort: Medium · IRCTC
                 </div>
               </div>
-              
+
               <div className="mb-10 relative">
                 <div className="absolute -left-[2.1rem] top-0 w-6 h-6 rounded-full bg-sky-500/10 flex items-center justify-center border border-sky-500/20">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-sky-400" viewBox="0 0 20 20" fill="currentColor">
@@ -76,7 +76,7 @@ export function UseCasesSection() {
                   ₹4,120 · Comfort: High · IndiGo
                 </div>
               </div>
-              
+
               <div className="mb-10 relative">
                 <div className="absolute -left-[2.1rem] top-0 w-6 h-6 rounded-full bg-orange-500/10 flex items-center justify-center border border-orange-500/20">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-orange-400" viewBox="0 0 20 20" fill="currentColor">
@@ -91,7 +91,7 @@ export function UseCasesSection() {
                   ₹280 · Comfort: Medium · RedBus
                 </div>
               </div>
-              
+
               <div className="relative">
                 <div className="absolute -left-[2.1rem] top-0 w-6 h-6 rounded-full bg-blue-500/10 flex items-center justify-center border border-blue-500/20">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
@@ -99,14 +99,14 @@ export function UseCasesSection() {
                     <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1v-5h2v5a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H19a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0017 7h-2V4a1 1 0 00-1-1H3z" />
                   </svg>
                 </div>
-                <h3 className="font-medium text-lg mb-1">Cab to Manipal University</h3>
+                <h3 className="font-medium text-lg mb-1">Cab to Manipal Institute of Technology</h3>
                 <p className="text-muted-foreground mb-2">5:30 PM - 6:45 PM (1h 15m)</p>
                 <div className="bg-background rounded px-4 py-2 inline-block text-sm text-muted-foreground border border-border">
                   ₹620 · Comfort: High · Uber
                 </div>
               </div>
             </div>
-            
+
             <div className="mt-10 p-4 bg-background rounded-lg border border-border">
               <div className="flex flex-wrap justify-between gap-4">
                 <div>
@@ -132,4 +132,4 @@ export function UseCasesSection() {
       </div>
     </section>
   );
-} 
+}
