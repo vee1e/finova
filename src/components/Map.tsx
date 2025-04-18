@@ -10,6 +10,7 @@ const routeCoordinates = [
 ];
 
 export default function MapComponent() {
+  const routeCoordinates = coordinates.map(c => new LatLng(c[0], c[1]));
   return (
     <MapContainer center={[19.0760, 72.8777]} zoom={6} style={{ width: "100%", height: "100%" }}>
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />

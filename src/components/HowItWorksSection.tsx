@@ -9,10 +9,10 @@ const Map = dynamic(() => import("./Map"), {
 
 
 export function HowItWorksSection() {
-  const routeCoordinates = [
-    new LatLng(19.0760, 72.8777), // Mumbai
-    new LatLng(12.9716, 77.5946)  // Bangalore
-  ];
+    const routeCoordinates: [number, number][] = [
+        [19.0760, 72.8777],
+        [12.9716, 77.5946]
+    ];
 
   return (
     <section id="how-it-works" className="py-20 mt-[80px]"> {/* Adjusted top margin */}
@@ -84,7 +84,7 @@ export function HowItWorksSection() {
               </div>
             </div>
             <div className="flex-shrink-0 w-full md:w-[400px] h-[350px] md:h-[350px] rounded-xl shadow-xl overflow-hidden mt-6 md:mt-0 z-0">
-                <Map />
+                <Map coordinates={routeCoordinates}/>
             </div>
           </div>
         </div>
