@@ -7,8 +7,8 @@ import "leaflet/dist/leaflet.css";
 
 export function HowItWorksSection() {
   const routeCoordinates = [
-    [19.0760, 72.8777], // Mumbai
-    [12.9716, 77.5946]  // Bangalore
+    new LatLng(19.0760, 72.8777), // Mumbai
+    new LatLng(12.9716, 77.5946)  // Bangalore
   ];
 
   return (
