@@ -1,10 +1,18 @@
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
+import { MapContainer, TileLayer, Marker, Popup, Polyline } from "react-leaflet";
+import { LatLng, icon } from "leaflet";
+import "leaflet/dist/leaflet.css";
 
 export function HowItWorksSection() {
+  const routeCoordinates = [
+    [19.0760, 72.8777], // Mumbai
+    [12.9716, 77.5946]  // Bangalore
+  ];
+
   return (
-    <section id="how-it-works" className="py-20">
+    <section id="how-it-works" className="py-20 mt-[80px]"> {/* Adjusted top margin */}
       <div className="container">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">How YatraGPT Works</h2>
@@ -12,7 +20,7 @@ export function HowItWorksSection() {
             One platform to plan and book your entire journey - from start to destination
           </p>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           <div className="flex flex-col items-center text-center">
             <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 border border-primary/20">
@@ -23,7 +31,7 @@ export function HowItWorksSection() {
               Enter your starting point, destination, and preferences for cost, comfort, and speed.
             </p>
           </div>
-          
+
           <div className="flex flex-col items-center text-center">
             <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 border border-primary/20">
               <span className="text-primary text-2xl font-bold">2</span>
@@ -33,7 +41,7 @@ export function HowItWorksSection() {
               Our AI engine creates personalized multi-modal routes considering availability, real-time data, and your preferences.
             </p>
           </div>
-          
+
           <div className="flex flex-col items-center text-center">
             <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-6 border border-primary/20">
               <span className="text-primary text-2xl font-bold">3</span>
@@ -48,7 +56,7 @@ export function HowItWorksSection() {
         <div className="mt-16 p-6 bg-card rounded-xl max-w-4xl mx-auto border border-border shadow">
           <div className="flex flex-col md:flex-row items-center">
             <div className="flex-1 mb-6 md:mb-0 md:mr-6">
-              <div className="text-primary font-mono mb-2">YatraGPT {`>`}</div>
+              <div className="text-primary pb-6 font-mono mb-2">YatraGPT {`>`} I want to go from Mumbai to Bangalore</div>
               <div className="p-4 bg-background rounded-lg border border-border shadow-sm">
                 <p className="text-foreground mb-2 font-medium">Your optimal route from Mumbai to Bangalore:</p>
                 <ol className="space-y-2 text-sm">
@@ -72,14 +80,28 @@ export function HowItWorksSection() {
                 <p className="text-sm text-primary mt-4 font-medium">Total: ₹5,245 · 4h 15m · Comfort: High</p>
               </div>
             </div>
-            <div className="flex-shrink-0">
-              <div className="w-48 h-48 rounded-xl bg-background shadow-md border border-border flex items-center justify-center">
-                <span className="text-primary font-semibold">Interactive Journey Map</span>
-              </div>
+            <div className="flex-shrink-0 w-full md:w-[400px] h-[350px] md:h-[350px] rounded-xl shadow-xl overflow-hidden mt-6 md:mt-0 z-0">
+              <MapContainer center={new LatLng(19.0760, 72.8777)} zoom={6} style={{ width: "100%", height: "100%" }}>
+                <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                <Marker
+                  position={new LatLng(19.0760, 72.8777)}
+                  icon={icon({ iconUrl: "/path/to/your/custom-marker-icon.png", iconSize: [30, 30] })}
+                >
+                  <Popup>Mumbai</Popup>
+                </Marker>
+                <Marker
+                  position={new LatLng(12.9716, 77.5946)}
+                  icon={icon({ iconUrl: "/path/to/your/custom-marker-icon.png", iconSize: [30, 30] })}
+                >
+                  <Popup>Bangalore</Popup>
+                </Marker>
+                <Polyline positions={routeCoordinates} color="blue" weight={4} opacity={0.7} />
+              </MapContainer>
             </div>
           </div>
         </div>
       </div>
     </section>
   );
-} 
+}
+
