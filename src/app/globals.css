@@ -3,6 +3,35 @@
 
 @custom-variant dark (&:is(.dark *));
 
+html {
+  scroll-behavior: smooth;
+}
+
+.nav-link-glow {
+  text-shadow: 0 0 0 rgba(255, 255, 255, 0);
+  transition: text-shadow 0.3s ease, color 0.3s ease;
+  position: relative;
+}
+
+.nav-link-glow-active {
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+}
+
+.nav-link-glow::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 2px;
+  width: 0;
+  background: currentColor;
+  transition: width 0.3s ease;
+}
+
+.nav-link-underlined-active::after {
+  width: 100%;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -53,39 +82,39 @@
   --card-foreground: #4c4f69;
   --popover: #eff1f5;
   --popover-foreground: #4c4f69;
-  
+
   /* Primary - Teal */
   --primary: #179299;
   --primary-foreground: #eff1f5;
-  
+
   /* Secondary - Surface0 */
   --secondary: #ccd0da;
   --secondary-foreground: #4c4f69;
-  
+
   /* Muted - Surface1 */
   --muted: #bcc0cc;
   --muted-foreground: #8c8fa1;
-  
+
   /* Accent - Lavender */
   --accent: #7287fd;
   --accent-foreground: #eff1f5;
-  
+
   /* Destructive - Red */
   --destructive: #d20f39;
   --destructive-foreground: #eff1f5;
-  
+
   /* Borders and UI */
   --border: #dce0e8;
   --input: #dce0e8;
   --ring: #1e66f5;
-  
+
   /* Charts */
   --chart-1: #1e66f5; /* Blue */
   --chart-2: #40a02b; /* Green */
   --chart-3: #fe640b; /* Peach */
   --chart-4: #ea76cb; /* Pink */
   --chart-5: #df8e1d; /* Yellow */
-  
+
   /* Sidebar */
   --sidebar: #eff1f5;
   --sidebar-foreground: #4c4f69;
@@ -106,39 +135,39 @@
   --card-foreground: #cdd6f4;
   --popover: #181825;
   --popover-foreground: #cdd6f4;
-  
+
   /* Primary - Teal */
   --primary: #94e2d5;
   --primary-foreground: #11111b;
-  
+
   /* Secondary - Surface0 */
   --secondary: #313244;
   --secondary-foreground: #cdd6f4;
-  
+
   /* Muted - Surface1 */
   --muted: #313244;
   --muted-foreground: #a6adc8;
-  
+
   /* Accent - Lavender */
   --accent: #b4befe;
   --accent-foreground: #11111b;
-  
+
   /* Destructive - Red */
   --destructive: #f38ba8;
   --destructive-foreground: #cdd6f4;
-  
+
   /* Borders and UI */
   --border: #313244;
   --input: #313244;
   --ring: #94e2d5;
-  
+
   /* Charts */
   --chart-1: #89b4fa; /* Blue */
   --chart-2: #a6e3a1; /* Green */
   --chart-3: #fab387; /* Peach */
   --chart-4: #f5c2e7; /* Pink */
   --chart-5: #f9e2af; /* Yellow */
-  
+
   /* Sidebar */
   --sidebar: #11111b;
   --sidebar-foreground: #cdd6f4;
@@ -155,7 +184,7 @@
     font-size: 100%; /* Base font size */
     zoom: 1.2; /* Increase overall site scale */
   }
-  
+
   * {
     @apply border-border outline-ring/50;
   }
@@ -163,39 +192,39 @@
     @apply bg-background text-foreground;
     font-size: 1.05rem; /* Increase base body font size */
   }
-  
+
   h1 {
     font-size: 2.5rem !important; /* Large headings */
     line-height: 1.2 !important;
   }
-  
+
   h2 {
     font-size: 2rem !important; /* Section headings */
     line-height: 1.25 !important;
   }
-  
+
   h3 {
     font-size: 1.5rem !important; /* Sub headings */
     line-height: 1.3 !important;
   }
-  
+
   p {
     font-size: 1.05rem !important; /* Paragraph text */
     line-height: 1.5 !important;
   }
-  
+
   .text-lg {
     font-size: 1.125rem !important;
   }
-  
+
   .text-sm {
     font-size: 0.95rem !important;
   }
-  
+
   .text-xs {
     font-size: 0.85rem !important;
   }
-  
+
   button, .button {
     font-size: 1rem !important;
     padding: 0.75rem 1.5rem !important;
