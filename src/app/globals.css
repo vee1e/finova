@@ -43,16 +43,16 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* Catppuccin Frappe Theme - Light Mode */
+/* Catppuccin Latte Theme - Light Mode */
 :root {
   --radius: 0.625rem;
   /* Base */
   --background: #eff1f5;
-  --foreground: #232634;
+  --foreground: #4c4f69;
   --card: #eff1f5;
-  --card-foreground: #232634;
+  --card-foreground: #4c4f69;
   --popover: #eff1f5;
-  --popover-foreground: #232634;
+  --popover-foreground: #4c4f69;
   
   /* Primary - Teal */
   --primary: #179299;
@@ -60,94 +60,94 @@
   
   /* Secondary - Surface0 */
   --secondary: #ccd0da;
-  --secondary-foreground: #232634;
+  --secondary-foreground: #4c4f69;
   
   /* Muted - Surface1 */
   --muted: #bcc0cc;
-  --muted-foreground: #51576d;
+  --muted-foreground: #8c8fa1;
   
   /* Accent - Lavender */
-  --accent: #babbf1;
-  --accent-foreground: #232634;
+  --accent: #7287fd;
+  --accent-foreground: #eff1f5;
   
   /* Destructive - Red */
-  --destructive: #e78284;
+  --destructive: #d20f39;
   --destructive-foreground: #eff1f5;
   
   /* Borders and UI */
-  --border: #acb0be;
-  --input: #acb0be;
-  --ring: #8caaee;
+  --border: #dce0e8;
+  --input: #dce0e8;
+  --ring: #1e66f5;
   
   /* Charts */
-  --chart-1: #8caaee; /* Blue */
-  --chart-2: #a6d189; /* Green */
-  --chart-3: #ef9f76; /* Peach */
-  --chart-4: #f4b8e4; /* Pink */
-  --chart-5: #e5c890; /* Yellow */
+  --chart-1: #1e66f5; /* Blue */
+  --chart-2: #40a02b; /* Green */
+  --chart-3: #fe640b; /* Peach */
+  --chart-4: #ea76cb; /* Pink */
+  --chart-5: #df8e1d; /* Yellow */
   
   /* Sidebar */
   --sidebar: #eff1f5;
-  --sidebar-foreground: #232634;
+  --sidebar-foreground: #4c4f69;
   --sidebar-primary: #179299;
   --sidebar-primary-foreground: #eff1f5;
-  --sidebar-accent: #babbf1;
-  --sidebar-accent-foreground: #232634;
-  --sidebar-border: #acb0be;
-  --sidebar-ring: #8caaee;
+  --sidebar-accent: #7287fd;
+  --sidebar-accent-foreground: #eff1f5;
+  --sidebar-border: #dce0e8;
+  --sidebar-ring: #1e66f5;
 }
 
-/* Catppuccin Frappe Theme - Dark Mode */
+/* Catppuccin Mocha Theme - Dark Mode */
 .dark {
   /* Base */
-  --background: #303446;
-  --foreground: #c6d0f5;
-  --card: #292c3c;
-  --card-foreground: #c6d0f5;
-  --popover: #292c3c;
-  --popover-foreground: #c6d0f5;
+  --background: #1e1e2e;
+  --foreground: #cdd6f4;
+  --card: #181825;
+  --card-foreground: #cdd6f4;
+  --popover: #181825;
+  --popover-foreground: #cdd6f4;
   
   /* Primary - Teal */
-  --primary: #81c8be;
-  --primary-foreground: #232634;
+  --primary: #94e2d5;
+  --primary-foreground: #11111b;
   
   /* Secondary - Surface0 */
-  --secondary: #414559;
-  --secondary-foreground: #c6d0f5;
+  --secondary: #313244;
+  --secondary-foreground: #cdd6f4;
   
   /* Muted - Surface1 */
-  --muted: #414559;
-  --muted-foreground: #a5adce;
+  --muted: #313244;
+  --muted-foreground: #a6adc8;
   
   /* Accent - Lavender */
-  --accent: #babbf1;
-  --accent-foreground: #232634;
+  --accent: #b4befe;
+  --accent-foreground: #11111b;
   
   /* Destructive - Red */
-  --destructive: #e78284;
-  --destructive-foreground: #c6d0f5;
+  --destructive: #f38ba8;
+  --destructive-foreground: #cdd6f4;
   
   /* Borders and UI */
-  --border: #414559;
-  --input: #414559;
-  --ring: #81c8be;
+  --border: #313244;
+  --input: #313244;
+  --ring: #94e2d5;
   
   /* Charts */
-  --chart-1: #8caaee; /* Blue */
-  --chart-2: #a6d189; /* Green */
-  --chart-3: #ef9f76; /* Peach */
-  --chart-4: #f4b8e4; /* Pink */
-  --chart-5: #e5c890; /* Yellow */
+  --chart-1: #89b4fa; /* Blue */
+  --chart-2: #a6e3a1; /* Green */
+  --chart-3: #fab387; /* Peach */
+  --chart-4: #f5c2e7; /* Pink */
+  --chart-5: #f9e2af; /* Yellow */
   
   /* Sidebar */
-  --sidebar: #232634;
-  --sidebar-foreground: #c6d0f5;
-  --sidebar-primary: #81c8be;
-  --sidebar-primary-foreground: #232634;
-  --sidebar-accent: #414559;
-  --sidebar-accent-foreground: #c6d0f5;
-  --sidebar-border: rgba(198, 208, 245, 0.1);
-  --sidebar-ring: #a5adce;
+  --sidebar: #11111b;
+  --sidebar-foreground: #cdd6f4;
+  --sidebar-primary: #94e2d5;
+  --sidebar-primary-foreground: #11111b;
+  --sidebar-accent: #313244;
+  --sidebar-accent-foreground: #cdd6f4;
+  --sidebar-border: rgba(205, 214, 244, 0.1);
+  --sidebar-ring: #a6adc8;
 }
 
 @layer base {
@@ -201,50 +201,51 @@
     padding: 0.75rem 1.5rem !important;
   }
 
-  /* Catppuccin Frappe HSL values */
+  /* Catppuccin Latte HSL values */
   :root {
-    --background: 227 27% 95%;
-    --foreground: 229 24% 17%;
-    --card: 227 27% 95%;
-    --card-foreground: 229 24% 17%;
-    --popover: 227 27% 95%;
-    --popover-foreground: 229 24% 17%;
+    --background: 220 23% 95%;
+    --foreground: 234 16% 35%;
+    --card: 220 23% 95%;
+    --card-foreground: 234 16% 35%;
+    --popover: 220 23% 95%;
+    --popover-foreground: 234 16% 35%;
     --primary: 183 72% 35%;
-    --primary-foreground: 227 27% 95%;
+    --primary-foreground: 220 23% 95%;
     --secondary: 223 16% 83%;
-    --secondary-foreground: 229 24% 17%;
+    --secondary-foreground: 234 16% 35%;
     --muted: 223 14% 77%;
-    --muted-foreground: 227 10% 37%;
-    --accent: 239 59% 84%;
-    --accent-foreground: 229 24% 17%;
-    --destructive: 359 76% 71%;
-    --destructive-foreground: 227 27% 95%;
-    --border: 225 10% 71%;
-    --input: 225 10% 71%;
-    --ring: 224 74% 74%;
+    --muted-foreground: 234 13% 59%;
+    --accent: 239 84% 73%;
+    --accent-foreground: 220 23% 95%;
+    --destructive: 347 87% 44%;
+    --destructive-foreground: 220 23% 95%;
+    --border: 220 23% 89%;
+    --input: 220 23% 89%;
+    --ring: 221 83% 53%;
     --radius: 0.5rem;
   }
 
+  /* Catppuccin Mocha HSL values */
   .dark {
-    --background: 229 23% 23%;
-    --foreground: 227 70% 87%;
-    --card: 230 22% 20%;
-    --card-foreground: 227 70% 87%;
-    --popover: 230 22% 20%;
-    --popover-foreground: 227 70% 87%;
-    --primary: 183 41% 65%;
-    --primary-foreground: 229 24% 17%;
-    --secondary: 227 17% 30%;
-    --secondary-foreground: 227 70% 87%;
-    --muted: 227 17% 30%;
-    --muted-foreground: 227 32% 73%;
-    --accent: 239 59% 84%;
-    --accent-foreground: 229 24% 17%;
-    --destructive: 359 76% 71%;
-    --destructive-foreground: 227 70% 87%;
-    --border: 227 17% 30%;
-    --input: 227 17% 30%;
-    --ring: 183 41% 65%;
+    --background: 240 21% 15%;
+    --foreground: 226 64% 88%;
+    --card: 240 27% 12%;
+    --card-foreground: 226 64% 88%;
+    --popover: 240 27% 12%;
+    --popover-foreground: 226 64% 88%;
+    --primary: 177 74% 74%;
+    --primary-foreground: 240 67% 8%;
+    --secondary: 240 24% 23%;
+    --secondary-foreground: 226 64% 88%;
+    --muted: 240 24% 23%;
+    --muted-foreground: 227 35% 72%;
+    --accent: 227 100% 85%;
+    --accent-foreground: 240 67% 8%;
+    --destructive: 343 81% 75%;
+    --destructive-foreground: 226 64% 88%;
+    --border: 240 24% 23%;
+    --input: 240 24% 23%;
+    --ring: 177 74% 74%;
   }
 }
 
@@ -292,3 +293,4 @@ section {
   padding-top: 5rem !important;
   padding-bottom: 5rem !important;
 }
+
