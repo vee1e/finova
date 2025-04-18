@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export function Navbar() {
   return (
@@ -28,9 +29,12 @@ export function Navbar() {
             Vision
           </Link>
         </nav>
-        <Link href="#waitlist">
-          <Button className="bg-primary hover:bg-primary/90 text-primary-foreground text-base px-6 py-3">Join Waitlist</Button>
-        </Link>
+        <div className="flex items-center gap-4">
+          <ThemeToggle />
+          <Link href="#waitlist">
+            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground text-base px-6 py-3">Join Waitlist</Button>
+          </Link>
+        </div>
       </div>
     </div>
   );
