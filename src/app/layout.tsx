@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "YatraGPT - AI-powered travel intelligence for India",
   description: "India's first AI-powered travel intelligence engine for end-to-end journey planning",
+  viewport: "width=device-width, initial-scale=1.0",
 };
 
 export default function RootLayout({

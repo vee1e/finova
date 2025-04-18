@@ -1,105 +1,121 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import React from "react";
 
 export function WaitlistSection() {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    // In a real application, this would send the form data to a server
+    alert("Thank you for joining our waitlist! We'll be in touch soon.");
+  };
+
   return (
-    <section id="waitlist" className="py-20 bg-zinc-900 text-white">
+    <section id="waitlist" className="py-24 bg-card">
       <div className="container">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Join the Waitlist</h2>
-          <p className="text-lg text-zinc-300 max-w-2xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">Join the Waitlist</h2>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Be among the first to experience the future of travel planning in India
           </p>
         </div>
         
-        <div className="max-w-md mx-auto">
-          <form className="space-y-6">
+        <div className="max-w-xl mx-auto">
+          <form className="space-y-8" onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="name" className="block text-sm font-medium mb-2">
+              <label htmlFor="name" className="block text-lg font-medium mb-3">
                 Full Name
               </label>
               <Input
                 id="name"
                 type="text"
                 placeholder="John Doe"
-                className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500"
+                className="bg-background border-border text-foreground placeholder:text-muted-foreground text-lg py-6"
+                required
               />
             </div>
             
             <div>
-              <label htmlFor="email" className="block text-sm font-medium mb-2">
+              <label htmlFor="email" className="block text-lg font-medium mb-3">
                 Email Address
               </label>
               <Input
                 id="email"
                 type="email"
                 placeholder="john@example.com"
-                className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500"
+                className="bg-background border-border text-foreground placeholder:text-muted-foreground text-lg py-6"
+                required
               />
             </div>
             
             <div>
-              <label htmlFor="city" className="block text-sm font-medium mb-2">
+              <label htmlFor="city" className="block text-lg font-medium mb-3">
                 City
               </label>
               <Input
                 id="city"
                 type="text"
                 placeholder="Mumbai"
-                className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500"
+                className="bg-background border-border text-foreground placeholder:text-muted-foreground text-lg py-6"
+                required
               />
             </div>
             
             <div>
-              <label className="block text-sm font-medium mb-2">
+              <label className="block text-lg font-medium mb-3">
                 I mostly travel for:
               </label>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-4">
                 <div className="flex items-center">
                   <input 
                     type="radio" 
                     id="business" 
                     name="travel_purpose" 
-                    className="h-4 w-4 text-emerald-600 border-zinc-700 focus:ring-emerald-500 bg-zinc-800"
+                    className="h-5 w-5 text-primary border-border focus:ring-primary bg-background"
+                    required
                   />
-                  <label htmlFor="business" className="ml-2 text-sm">Business</label>
+                  <label htmlFor="business" className="ml-3 text-base">Business</label>
                 </div>
                 <div className="flex items-center">
                   <input 
                     type="radio" 
                     id="leisure" 
                     name="travel_purpose" 
-                    className="h-4 w-4 text-emerald-600 border-zinc-700 focus:ring-emerald-500 bg-zinc-800"
+                    className="h-5 w-5 text-primary border-border focus:ring-primary bg-background"
                   />
-                  <label htmlFor="leisure" className="ml-2 text-sm">Leisure</label>
+                  <label htmlFor="leisure" className="ml-3 text-base">Leisure</label>
                 </div>
                 <div className="flex items-center">
                   <input 
                     type="radio" 
                     id="education" 
                     name="travel_purpose" 
-                    className="h-4 w-4 text-emerald-600 border-zinc-700 focus:ring-emerald-500 bg-zinc-800"
+                    className="h-5 w-5 text-primary border-border focus:ring-primary bg-background"
                   />
-                  <label htmlFor="education" className="ml-2 text-sm">Education</label>
+                  <label htmlFor="education" className="ml-3 text-base">Education</label>
                 </div>
                 <div className="flex items-center">
                   <input 
                     type="radio" 
                     id="other" 
                     name="travel_purpose" 
-                    className="h-4 w-4 text-emerald-600 border-zinc-700 focus:ring-emerald-500 bg-zinc-800"
+                    className="h-5 w-5 text-primary border-border focus:ring-primary bg-background"
                   />
-                  <label htmlFor="other" className="ml-2 text-sm">Other</label>
+                  <label htmlFor="other" className="ml-3 text-base">Other</label>
                 </div>
               </div>
             </div>
             
-            <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-6">
+            <Button 
+              type="submit" 
+              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-6 text-xl"
+            >
               Join Waitlist
             </Button>
             
-            <p className="text-xs text-zinc-400 text-center">
+            <p className="text-sm text-muted-foreground text-center">
               By joining, you agree to receive updates about YatraGPT. 
               We respect your privacy and will never share your information.
             </p>
