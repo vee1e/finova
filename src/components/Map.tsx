@@ -2,6 +2,7 @@
 
 import { MapContainer, TileLayer, Marker, Popup, Polyline } from "react-leaflet";
 import { LatLng, icon } from "leaflet";
+import "leaflet/dist/leaflet.css";
 
 const routeCoordinates = [
   new LatLng(19.0760, 72.8777),

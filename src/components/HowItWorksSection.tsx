@@ -1,10 +1,6 @@
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { MapContainer, TileLayer, Marker, Popup, Polyline } from "react-leaflet";
-import { LatLng, icon } from "leaflet";
-import "leaflet/dist/leaflet.css";
-
 import dynamic from "next/dynamic";
 
 const Map = dynamic(() => import("./Map"), {
