@@ -9,7 +9,7 @@ const routeCoordinates = [
   new LatLng(12.9716, 77.5946)
 ];
 
-export default function MapComponent() {
+export default function Map({ coordinates }: { coordinates: [number, number][] }) {
   const routeCoordinates = coordinates.map(c => new LatLng(c[0], c[1]));
   return (
     <MapContainer center={[19.0760, 72.8777]} zoom={6} style={{ width: "100%", height: "100%" }}>
