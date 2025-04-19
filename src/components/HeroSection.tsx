@@ -23,11 +23,18 @@ export function HeroSection() {
               YatraGPT plans your end-to-end journeys across multiple transport modes.
               From autorickshaws to airlines, we stitch India&apos;s chaotic transport mesh into a seamless experience.
             </p>
-            <Link href="#waitlist">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-14 py-9 text-xl">
-                Join the Waitlist
-              </Button>
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+              <Link href="#waitlist">
+                <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-14 py-9 text-xl w-full sm:w-auto">
+                  Join the Waitlist
+                </Button>
+              </Link>
+              <Link href="/chat">
+                <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary/10 px-14 py-9 text-xl w-full sm:w-auto">
+                  Try Demo
+                </Button>
+              </Link>
+            </div>
             <p className="text-muted-foreground mt-6 text-lg">Currently in beta - 750+ users on waitlist</p>
           </div>
         </div>
