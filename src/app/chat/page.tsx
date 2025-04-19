@@ -15,23 +15,41 @@ export default function ChatPage() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  const validateAndBeautifyJSON = (jsonString: string): { valid: boolean; content: string } => {
+    try {
+      const parsed = JSON.parse(jsonString);
+      return {
+        valid: true,
+        content: JSON.stringify(parsed, null, 2) // Pretty print with 2-space indentation
+      };
+    } catch (error) {
+      return {
+        valid: false,
+        content: `Invalid JSON: ${(error as Error).message}`
+      };
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
-  
+
     const userMessage = input.trim();
     setInput("");
     setMessages(prev => [...prev, { role: "user", content: userMessage }]);
     setIsLoading(true);
-  
+
     try {
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
       const systemPrompt = `Respond only in JSON with the format: {"src": src, "dest": dest}. Extract both locations from the input and respond with their railway station city codes in the JSON. If input is irrelevant, respond with empty JSON. DO NOT PRINT BACKTICKS.`;
-      const result = await model.generateContent([systemPrompt, userMessage].join("\n"));
-      const response = await result.response;
+      const generationResult = await model.generateContent([systemPrompt, userMessage].join("\n"));
+      const response = await generationResult.response;
       const text = response.text();
-  
-      setMessages(prev => [...prev, { role: "assistant", content: text }]);
+
+      // Validate and beautify JSON
+      const { valid, content } = validateAndBeautifyJSON(text);
+
+      setMessages(prev => [...prev, { role: "assistant", content: content }]);
     } catch (error) {
       console.error("Error:", error);
       setMessages(prev => [...prev, { role: "assistant", content: "Sorry, I encountered an error. Please try again." }]);
@@ -39,7 +57,6 @@ export default function ChatPage() {
       setIsLoading(false);
     }
   };
-  
 
   return (
     <div className="min-h-screen bg-background p-4">
@@ -55,7 +72,9 @@ export default function ChatPage() {
                   : "bg-muted max-w-[80%]"
               }`}
             >
-              {message.content}
+              <pre className={`whitespace-pre-wrap ${message.role === "assistant" ? "font-mono text-sm" : ""}`}>
+                {message.content}
+              </pre>
             </div>
           ))}
           {isLoading && (
@@ -76,4 +95,4 @@ export default function ChatPage() {
       </div>
     </div>
   );
-} 
+}
