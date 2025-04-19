@@ -119,7 +119,7 @@ export default function ChatPage() {
         `https://irctc1.p.rapidapi.com/api/v1/searchStation?query=${encodeURIComponent(stationName)}`,
         {
           headers: {
-            'x-rapidapi-key': '09b3989b0bmsh3ef75ad308a9264p1d37e5jsn593a31023ee6',
+            'x-rapidapi-key': '0ac855de1bmshdec063eed1fbc2bp1c6950jsn3e071d58ae8f',
             'x-rapidapi-host': 'irctc1.p.rapidapi.com'
           }
         }
@@ -177,13 +177,18 @@ export default function ChatPage() {
         `https://irctc1.p.rapidapi.com/api/v2/getFare?trainNo=${trainNo}&fromStationCode=${fromStationCode}&toStationCode=${toStationCode}`,
         {
           headers: {
-            'x-rapidapi-key': '09b3989b0bmsh3ef75ad308a9264p1d37e5jsn593a31023ee6',
+            'x-rapidapi-key': '0ac855de1bmshdec063eed1fbc2bp1c6950jsn3e071d58ae8f',
             'x-rapidapi-host': 'irctc1.p.rapidapi.com'
           }
         }
       );
       return response.data;
     } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        console.error('API Error:', error.response.status, error.response.data);
+        throw new Error(`API error: ${error.response.status} ${error.response.statusText}`);
+      }
+      
       if (error instanceof Error) {
         throw new Error(`Error getting fare: ${error.message}`);
       }
