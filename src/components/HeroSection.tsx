@@ -19,7 +19,7 @@ export function HeroSection() {
             From autorickshaws to airlines, we stitch India&apos;s chaotic transport mesh into a seamless experience.
           </p>
           <Link href="#waitlist">
-            <Button size="xl" className="bg-primary hover:bg-primary/90 text-primary-foreground px-14 py-9 text-xl">
+            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-14 py-9 text-xl">
               Join the Waitlist
             </Button>
           </Link>
