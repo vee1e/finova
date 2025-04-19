@@ -1,0 +1,8 @@
+# Uber API to implement cab booking
+
+https://developer.uber.com/docs/riders/ride-requests/tutorials/api/introduction
+
+
+# IRCTC API
+
+https://rapidapi.com/IRCTCAPI/api/irctc1/playground/apiendpoint_184fa865-f743-4b56-9dbc-49efc3165bd6
