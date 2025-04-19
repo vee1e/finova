@@ -5,9 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import axios from "axios";
+import ReactMarkdown from 'react-markdown';
 
 const genAI = new GoogleGenerativeAI("AIzaSyD3_DyoFiECmNRa5mInLbhI5KZALGpc4ww");
-const KEY = 'a340505775msh411427a1d7a2656p19f512jsncbbe2e5e07e8';
+const KEY = '531aa029dcmshaa8f128a63bcce3p1be1c1jsn8826e625fe12';
 
 // Types for API responses and function parameters
 interface StationSearchResponse {
@@ -469,20 +470,22 @@ export default function ChatPage() {
       <div className="max-w-4xl mx-auto">
         <h1 className="text-4xl font-bold text-primary mb-8 text-center">YatraGPT Demo</h1>
         <Card className="p-4 mb-4 h-[60vh] overflow-y-auto">
-          {messages.map((message, index) => (
-            <div
-              key={index}
-              className={`mb-4 p-4 rounded-lg ${
-                message.role === "user"
-                  ? "bg-primary text-primary-foreground ml-auto max-w-[80%]"
-                  : "bg-muted max-w-[80%]"
-              }`}
-            >
-              <pre className={`whitespace-pre-wrap ${message.role === "assistant" ? "font-mono text-sm" : ""}`}>
-                {message.content}
-              </pre>
-            </div>
-          ))}
+        {messages.map((message, index) => (
+          <div
+            key={index}
+            className={`mb-4 p-4 rounded-lg ${
+              message.role === "user"
+                ? "bg-primary text-primary-foreground ml-auto max-w-[80%]"
+                : "bg-muted max-w-[80%]"
+            }`}
+          >
+            {message.role === "user" ? (
+              <div className="whitespace-pre-wrap">{message.content}</div>
+            ) : (
+              <ReactMarkdown>{message.content}</ReactMarkdown>
+            )}
+          </div>
+        ))}
           {isLoading && (
             <div className="text-center">
               <span className="text-muted-foreground animate-pulse font-medium text-lg relative">
