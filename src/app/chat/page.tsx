@@ -8,7 +8,7 @@ import axios from "axios";
 import ReactMarkdown from 'react-markdown';
 
 const genAI = new GoogleGenerativeAI("AIzaSyD3_DyoFiECmNRa5mInLbhI5KZALGpc4ww");
-const KEY = '531aa029dcmshaa8f128a63bcce3p1be1c1jsn8826e625fe12';
+const KEY = '957387a2f6msh0c2e85637910a8dp108527jsncbc024cda24a';
 
 // Types for API responses and function parameters
 interface StationSearchResponse {
