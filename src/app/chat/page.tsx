@@ -7,6 +7,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import axios from "axios";
 
 const genAI = new GoogleGenerativeAI("AIzaSyD3_DyoFiECmNRa5mInLbhI5KZALGpc4ww");
+const KEY = 'a340505775msh411427a1d7a2656p19f512jsncbbe2e5e07e8';
 
 // Types for API responses and function parameters
 interface StationSearchResponse {
@@ -33,8 +34,25 @@ interface TrainSearchResponse {
 
 interface FareResponse {
   data?: {
-    distance: string;
-    fare: Record<string, number>;
+    distance?: string;
+    general?: Array<{
+      classType: string;
+      fare: number;
+      breakup: Array<{
+        title: string;
+        key: string;
+        cost: number;
+      }>;
+    }>;
+    tatkal?: Array<{
+      classType: string;
+      fare: number;
+      breakup: Array<{
+        title: string;
+        key: string;
+        cost: number;
+      }>;
+    }>;
   };
   error?: string;
 }
@@ -46,7 +64,26 @@ interface TrainWithFare {
   arrival: string;
   duration: string;
   duration_minutes: number;
-  fares: Record<string, number>;
+  fares: {
+    general?: Array<{
+      classType: string;
+      fare: number;
+      breakup: Array<{
+        title: string;
+        key: string;
+        cost: number;
+      }>;
+    }>;
+    tatkal?: Array<{
+      classType: string;
+      fare: number;
+      breakup: Array<{
+        title: string;
+        key: string;
+        cost: number;
+      }>;
+    }>;
+  };
 }
 
 interface SearchParams {
@@ -105,7 +142,7 @@ export default function ChatPage() {
   const validateDateFormat = (dateStr: string): boolean => {
     const regex = /^\d{4}-\d{2}-\d{2}$/;
     if (!regex.test(dateStr)) return false;
-    
+
     const date = new Date(dateStr);
     return date instanceof Date && !isNaN(date.getTime());
   };
@@ -119,7 +156,7 @@ export default function ChatPage() {
         `https://irctc1.p.rapidapi.com/api/v1/searchStation?query=${encodeURIComponent(stationName)}`,
         {
           headers: {
-            'x-rapidapi-key': '0ac855de1bmshdec063eed1fbc2bp1c6950jsn3e071d58ae8f',
+            'x-rapidapi-key': KEY,
             'x-rapidapi-host': 'irctc1.p.rapidapi.com'
           }
         }
@@ -150,7 +187,7 @@ export default function ChatPage() {
         `https://irctc1.p.rapidapi.com/api/v3/trainBetweenStations?fromStationCode=${fromStationCode}&toStationCode=${toStationCode}&dateOfJourney=${travelDate}`,
         {
           headers: {
-            'x-rapidapi-key': '0ac855de1bmshdec063eed1fbc2bp1c6950jsn3e071d58ae8f',
+            'x-rapidapi-key': KEY,
             'x-rapidapi-host': 'irctc1.p.rapidapi.com'
           }
         }
@@ -167,34 +204,34 @@ export default function ChatPage() {
   /**
    * Gets fare information for a train journey
    */
-  const getTrainFare = async (
-    trainNo: string,
-    fromStationCode: string,
-    toStationCode: string
-  ): Promise<FareResponse> => {
-    try {
-      const response = await axios.get<FareResponse>(
-        `https://irctc1.p.rapidapi.com/api/v2/getFare?trainNo=${trainNo}&fromStationCode=${fromStationCode}&toStationCode=${toStationCode}`,
-        {
-          headers: {
-            'x-rapidapi-key': '0ac855de1bmshdec063eed1fbc2bp1c6950jsn3e071d58ae8f',
-            'x-rapidapi-host': 'irctc1.p.rapidapi.com'
-          }
+    const getTrainFare = async (
+  trainNo: string,
+  fromStationCode: string,
+  toStationCode: string
+): Promise<FareResponse> => {
+  try {
+    const response = await axios.get<FareResponse>(
+      `https://irctc1.p.rapidapi.com/api/v2/getFare?trainNo=${trainNo}&fromStationCode=${fromStationCode}&toStationCode=${toStationCode}`,
+      {
+        headers: {
+          'x-rapidapi-key': KEY,
+          'x-rapidapi-host': 'irctc1.p.rapidapi.com'
         }
-      );
-      return response.data;
-    } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        console.error('API Error:', error.response.status, error.response.data);
-        throw new Error(`API error: ${error.response.status} ${error.response.statusText}`);
       }
-      
-      if (error instanceof Error) {
-        throw new Error(`Error getting fare: ${error.message}`);
-      }
-      throw new Error('Unknown error occurred while getting fare information');
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      console.error('API Error:', error.response.status, error.response.data);
+      throw new Error(`API error: ${error.response.status} ${error.response.statusText}`);
     }
-  };
+
+    if (error instanceof Error) {
+      throw new Error(`Error getting fare: ${error.message}`);
+    }
+    throw new Error('Unknown error occurred while getting fare information');
+  }
+};
 
   /**
    * Main function to search for trains and get top 3 by duration with fares
@@ -202,99 +239,102 @@ export default function ChatPage() {
   const getTopTrainsByDuration = async (params: SearchParams): Promise<SearchResult> => {
     try {
       const { src, dest, date } = params;
-      
+
       // Validate inputs
       if (!src || !dest || !date) {
-        return { 
+        return {
           trains: [],
-          error: "Missing required parameters: src, dest, date" 
+          error: "Missing required parameters: src, dest, date"
         };
       }
-      
+
       if (!validateDateFormat(date)) {
-        return { 
+        return {
           trains: [],
-          error: "Invalid date format. Please use YYYY-MM-DD format." 
+          error: "Invalid date format. Please use YYYY-MM-DD format."
         };
       }
-      
+
       // Determine if input is station code or name
       let sourceCode = src;
       let destinationCode = dest;
-      
+
       // If not a station code (3-4 characters), try to find the code
       if (src.length !== 3 && src.length !== 4) {
         sourceCode = await findStationCode(src);
       }
-      
+
       if (dest.length !== 3 && dest.length !== 4) {
         destinationCode = await findStationCode(dest);
       }
-      
+
       // Search for trains
       const trainsData = await searchTrains(sourceCode, destinationCode, date);
-      
+
       if (!trainsData.data || trainsData.data.length === 0) {
-        return { 
+        return {
           trains: [],
-          error: "No trains found for the specified route and date" 
+          error: "No trains found for the specified route and date"
         };
       }
-      
+
       // Process trains and get fares
-      const trainPromises = trainsData.data.map(async (train) => {
-        const trainInfo: TrainWithFare = {
-          train_number: train.train_number,
-          train_name: train.train_name,
-          departure: train.from_sta,
-          arrival: train.to_sta,
-          duration: train.duration,
-          duration_minutes: durationToMinutes(train.duration),
-          fares: {}
-        };
-        
-        // Get fare information
-        try {
-          const fareData = await getTrainFare(trainInfo.train_number, sourceCode, destinationCode);
-          
-          if (fareData.data && fareData.data.fare) {
-            trainInfo.fares = fareData.data.fare;
-          }
-        } catch (error) {
-          // Continue even if fare retrieval fails for a train
-          console.error(`Failed to get fare for train ${trainInfo.train_number}: ${error}`);
-        }
-        
-        return trainInfo;
+            const trainPromises = trainsData.data.map(async (train) => {
+  const trainInfo: TrainWithFare = {
+    train_number: train.train_number,
+    train_name: train.train_name,
+    departure: train.from_sta,
+    arrival: train.to_sta,
+    duration: train.duration,
+    duration_minutes: durationToMinutes(train.duration),
+    fares: {}
+  };
+
+  // Get fare information
+  try {
+    const fareData = await getTrainFare(trainInfo.train_number, sourceCode, destinationCode);
+
+    if (fareData.data) {
+      trainInfo.fares = {
+        general: fareData.data.general,
+        tatkal: fareData.data.tatkal
+      };
+    }
+  } catch (error) {
+    // Continue even if fare retrieval fails for a train
+    console.error(`Failed to get fare for train ${trainInfo.train_number}: ${error}`);
+  }
+
+  return trainInfo;
       });
-      
+
       // Wait for all fare requests to complete
       const trainList = await Promise.all(trainPromises);
-      
+
       // Sort trains by duration (shortest first)
       const sortedTrains = trainList.sort((a, b) => a.duration_minutes - b.duration_minutes);
-      
+
       // Get top 3 trains
       const topTrains = sortedTrains.slice(0, 3);
-      
+
       // Remove duration_minutes from output
       const result = topTrains.map(train => {
         const { duration_minutes, ...rest } = train;
         return rest;
       });
-      
+
       return { trains: result };
-      
+
     } catch (error) {
       if (error instanceof Error) {
-        return { 
+        return {
           trains: [],
-          error: error.message 
+          error: error.message
         };
       }
-      return { 
+      return {
         trains: [],
-        error: "An unknown error occurred" 
+        error: "An unknown error occurred"
       };
     }
   };
@@ -314,35 +354,55 @@ export default function ChatPage() {
     }
   };
 
-  const formatTrainResults = (result: SearchResult): string => {
-    if (result.error) {
-      return `Error: ${result.error}`;
-    }
+    const formatTrainResults = (result: SearchResult): string => {
+  if (result.error) {
+    return `Error: ${result.error}`;
+  }
 
-    if (result.trains.length === 0) {
-      return "No trains found for this route and date.";
-    }
+  if (result.trains.length === 0) {
+    return "No trains found for this route and date.";
+  }
 
-    let formattedResponse = "🚆 Here are the top trains for your journey:\n\n";
+  let formattedResponse = "🚆 Here are the top trains for your journey:\n\n";
 
-    result.trains.forEach((train, index) => {
-      formattedResponse += `**Train ${index + 1}: ${train.train_name} (${train.train_number})**\n`;
-      formattedResponse += `Departure: ${train.departure} | Arrival: ${train.arrival} | Duration: ${train.duration}\n`;
-      
-      if (Object.keys(train.fares).length > 0) {
-        formattedResponse += "Fares:\n";
-        Object.entries(train.fares).forEach(([classType, fare]) => {
-          formattedResponse += `- ${classType}: ₹${fare}\n`;
+  result.trains.forEach((train, index) => {
+    formattedResponse += `**Train ${index + 1}: ${train.train_name} (${train.train_number})**\n`;
+    formattedResponse += `Departure: ${train.departure} | Arrival: ${train.arrival} | Duration: ${train.duration}\n\n`;
+
+    // Display fare information
+    if (train.fares && (train.fares.general?.length || train.fares.tatkal?.length)) {
+      if (train.fares.general?.length) {
+        formattedResponse += "**General Fares:**\n";
+        train.fares.general.forEach(fare => {
+          formattedResponse += `Class ${fare.classType}: ₹${fare.fare}\n`;
+          formattedResponse += "  *Fare Breakup:*\n";
+          fare.breakup.forEach(item => {
+            formattedResponse += `  - ${item.title}: ₹${item.cost}\n`;
+          });
+          formattedResponse += "\n";
         });
-      } else {
-        formattedResponse += "Fare information not available\n";
       }
-      
-      formattedResponse += "\n";
-    });
 
-    return formattedResponse;
-  };
+      if (train.fares.tatkal?.length) {
+        formattedResponse += "**Tatkal Fares:**\n";
+        train.fares.tatkal.forEach(fare => {
+          formattedResponse += `Class ${fare.classType}: ₹${fare.fare}\n`;
+          formattedResponse += "  *Fare Breakup:*\n";
+          fare.breakup.forEach(item => {
+            formattedResponse += `  - ${item.title}: ₹${item.cost}\n`;
+          });
+          formattedResponse += "\n";
+        });
+      }
+    } else {
+      formattedResponse += "Fare information not available\n";
+    }
+
+    formattedResponse += "\n";
+  });
+
+  return formattedResponse;
+};
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -351,7 +411,7 @@ export default function ChatPage() {
     setInput("");
     setMessages(prev => [...prev, { role: "user", content: userMessage }]);
     setIsLoading(true);
-    
+
     try {
       // Step 1: Get travel details from Gemini
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -359,10 +419,10 @@ export default function ChatPage() {
       const generationResult = await model.generateContent([systemPrompt, userMessage].join("\n"));
       const response = await generationResult.response;
       const text = response.text();
-      
+
       // Validate and parse JSON
       const { valid, content } = validateAndBeautifyJSON(text);
-      
+
       if (!valid) {
         setMessages(prev => [...prev, { role: "assistant", content: "Sorry, I couldn't understand your travel plans. Please try again with a clearer request." }]);
         return;
@@ -370,32 +430,32 @@ export default function ChatPage() {
 
       // Add intermediate message to show we're processing
       setMessages(prev => [...prev, { role: "assistant", content: `I found your travel details. Looking for trains...` }]);
-      
+
       // Step 2: Use the JSON to fetch train information
       const travelDetails = JSON.parse(content);
-      
+
       // Check if we have valid travel details
       if (!travelDetails.src || !travelDetails.dest || !travelDetails.date) {
-        setMessages(prev => [...prev, { 
-          role: "assistant", 
-          content: "I couldn't extract complete travel information. Please provide both source and destination locations along with a travel date." 
+        setMessages(prev => [...prev, {
+          role: "assistant",
+          content: "I couldn't extract complete travel information. Please provide both source and destination locations along with a travel date."
         }]);
         return;
       }
-      
+
       // Step 3: Fetch train information
       const trainResults = await getTopTrainsByDuration(travelDetails);
-      
+
       // Step 4: Format and display the results
       const formattedResults = formatTrainResults(trainResults);
-      
+
       // Update the last message with the train results
       setMessages(prev => {
         const newMessages = [...prev];
         newMessages[newMessages.length - 1] = { role: "assistant", content: formattedResults };
         return newMessages;
       });
-      
+
     } catch (error) {
       console.error("Error:", error);
       setMessages(prev => [...prev, { role: "assistant", content: "Sorry, I encountered an error while fetching train information. Please try again." }]);
