@@ -14,7 +14,7 @@ export function HeroSection() {
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight pt-18 mb-8">
             <span className="text-primary">India&apos;s First</span> AI Travel Agent
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-10 max-w-3xl">
+          <p className="text-lg md:text-2xl text-muted-foreground mb-10 max-w-3xl">
             YatraGPT plans your end-to-end journeys across multiple transport modes.
             From autorickshaws to airlines, we stitch India&apos;s chaotic transport mesh into a seamless experience.
           </p>
