@@ -30,7 +30,7 @@ export function HeroSection() {
                 </Button>
               </Link>
               <Link href="/chat">
-                <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary/10 px-14 py-9 text-xl w-full sm:w-auto">
+                <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-14 py-9 text-xl w-full sm:w-auto">
                   Try Demo
                 </Button>
               </Link>
