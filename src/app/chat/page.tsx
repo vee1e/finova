@@ -7,8 +7,8 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import axios from "axios";
 import ReactMarkdown from 'react-markdown';
 
-const genAI = new GoogleGenerativeAI("AIzaSyD3_DyoFiECmNRa5mInLbhI5KZALGpc4ww");
-const KEY = '957387a2f6msh0c2e85637910a8dp108527jsncbc024cda24a';
+const genAI = new GoogleGenerativeAI("..."); // deprecated
+const KEY = '...'; // deprecated
 
 // Types for API responses and function parameters
 interface StationSearchResponse {
